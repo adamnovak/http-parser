@@ -4,6 +4,9 @@ include NOTICE
 include README.rst
 include THANKS
 include TODO.md
-include Makefile.ext
-recursive-include http_parser *
-recursive-include examples *
+recursive-include http_parser *.py *.pyx *.h *.gyp
+include http_parser/http_parser.c
+recursive-include examples *.py
+global-exclude */__pycache__/*
+global-exclude *.pyc
+
