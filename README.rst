@@ -22,7 +22,7 @@ Installation
 
 ::
 
-    $ pip install http-parser@git://github.com/adamnovak/http-parser.git
+    $ pip install http-parser@git+https://github.com/adamnovak/http-parser.git
 
 Or install from source::
 
