@@ -2001,11 +2001,17 @@ http_parse_host_char(enum http_host_state s, const char ch) {
 }
 
 static int
-http_parse_host(const char * buf, struct http_parser_url *u, int found_at) {
+http_parse_host(const char * buf, size_t raw_buflen, struct http_parser_url *u,
+                int found_at) {
   enum http_host_state s;
 
   const char *p;
   size_t buflen = u->field_data[UF_HOST].off + u->field_data[UF_HOST].len;
+
+  /* Make sure we dont extend beyond the input buffer. */
+  if (buflen > raw_buflen) {
+    return 1;
+  }
 
   u->field_data[UF_HOST].len = 0;
 
@@ -2147,7 +2153,7 @@ http_parser_parse_url(const char *buf, size_t buflen, int is_connect,
   /* host must be present if there is a schema */
   /* parsing http:///toto will fail */
   if ((u->field_set & ((1 << UF_SCHEMA) | (1 << UF_HOST))) != 0) {
-    if (http_parse_host(buf, u, found_at) != 0) {
+    if (http_parse_host(buf, buflen, u, found_at) != 0) {
       return 1;
     }
   }
