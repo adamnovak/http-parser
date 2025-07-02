@@ -20,6 +20,9 @@ name = "http-parser"
 authors = [
     {name = "Benoit Chesneau", email = "benoitc@e-engura.com"},
 ]
+maintainers = [
+    {name = "Adam Novak", email = "anovak@soe.ucsc.edu"},
+]
 readme = "README.rst"
 requires-python = ">=3.9"
 classifiers = [
@@ -42,4 +45,7 @@ classifiers = [
 license = "MIT"
 license-files = ["LICENSE"]
 dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/adamnovak/http-parser.git"
 
