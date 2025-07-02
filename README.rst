@@ -1,55 +1,50 @@
 http-parser
 -----------
 
-HTTP request/response parser for Python compatible with Python 2.x
-(>=2.7), Python 3 and Pypy. If possible a C parser based on
+HTTP request/response parser for Python.
+If possible a C parser based on
 http-parser_ from Ryan Dahl will be used.
 
 http-parser is under the MIT license.
 
-Project url: https://github.com/benoitc/http-parser/
+Project url: https://github.com/adamnovak/http-parser/
 
-.. image::
-    https://secure.travis-ci.org/benoitc/http-parser.png?branch=master
-    :alt: Build Status
-    :target: https://travis-ci.org/benoitc/http-parser
+Forked from the original ``http-parser``: https://github.com/benoitc/http-parser/
 
 Requirements:
 -------------
 
-- Python 2.7 or sup. Pypy latest version.
-- Cython if you need to rebuild the C code (Not needed for Pypy)
+- Python 3.9+ or pypy.
+- Cython (for C extension)
 
 Installation
 ------------
 
 ::
 
-    $ pip install http-parser
+    $ pip install http-parser@git://github.com/adamnovak/http-parser.git
 
 Or install from source::
 
-    $ git clone git://github.com/benoitc/http-parser.git
-    $ cd http-parser && python setup.py install
+    $ git clone git://github.com/adamnovak/http-parser.git
+    $ cd http-parser && pip install .
 
-
-Note: if you get an error on MacOSX try to install with the following
-arguments:
-
-    $ env ARCHFLAGS="-arch i386 -arch x86_64" python setup.py install
+Note that if you ``import http_parser`` from within the root of the project,
+you will load the source code from the ``http_parser/`` directory and not the
+installed module.
 
 Usage
 -----
 
-http-parser provide you **parser.HttpParser** low-level parser in C that
-you can access in your python program and **http.HttpStream** providing
-higher-level access to a readable,sequential io.RawIOBase object.
+http-parser provide you **parser.HttpParser**, a low-level parser in C that
+you can access in your Python program, and **http.HttpStream**, providing
+higher-level access to a readable, sequential io.RawIOBase object.
 
-To help you in your day work, http-parser provides you 3 kind of readers
+To help you in your daily work, http-parser provides you 3 kind of readers
 in the reader module: IterReader to read iterables, StringReader to
-reads strings and StringIO objects, SocketReader to read sockets or
-objects with the same api (recv_into needed). You can of course use any
-io.RawIOBase object.
+reads strings and StringIO objects, and SocketReader to read sockets or
+objects with the same API (i.e. those implementing ``recv_into``). You can of
+course use any io.RawIOBase object.
 
 Example of HttpStream
 +++++++++++++++++++++
